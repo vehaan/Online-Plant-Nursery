@@ -7,6 +7,4 @@ public class Customer {
 	private String username;
 	private String password;
 	private Address address;
-	
-//	Vehaan Singh Kundra
 }
