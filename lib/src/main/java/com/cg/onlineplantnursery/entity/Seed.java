@@ -14,7 +14,6 @@ public class Seed {
 	private double seedsCost;
 	private Integer seedsPerPacket;
 	
-	public static void main(String[] args) {
-		System.out.println("Hello world");
-	}
+	
+	//SHUBHAM SEED MODULE
 }
