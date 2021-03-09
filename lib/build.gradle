@@ -33,6 +33,7 @@ testCompile group: 'org.mockito', name: 'mockito-core', version: '3.5.7'
 
     // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
 implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.13.Final'
+
  
 
  compile files('libs/ojdbc6.jar')
