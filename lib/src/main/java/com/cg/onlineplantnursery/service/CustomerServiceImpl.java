@@ -17,32 +17,27 @@ public class CustomerServiceImpl implements ICustomerService {
 
 	@Override
 	public Customer updateCustomer(Customer tenant) {
-		// TODO Auto-generated method stub
-		return null;
+		return cr.updateCustomer(tenant);
 	}
 
 	@Override
 	public Customer deleteCustomer(Customer tenant) {
-		// TODO Auto-generated method stub
-		return null;
+		return cr.deleteCustomer(tenant);
 	}
 
 	@Override
 	public Customer viewCustomer(int customerId) {
-		// TODO Auto-generated method stub
-		return null;
+		return cr.viewCustomer(customerId);
 	}
 
 	@Override
 	public List<Customer> viewAllCustomers() {
-		// TODO Auto-generated method stub
-		return null;
+		return cr.viewAllCustomers();
 	}
 
 	@Override
 	public boolean validateCustomer(String userName, String password) {
-		// TODO Auto-generated method stub
-		return false;
+		return cr.validateCustomer(userName, password);
 	}
 
 }

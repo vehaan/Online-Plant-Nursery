@@ -1,6 +1,21 @@
 package com.cg.onlineplantnursery.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ADDRESS")
 public class Address {
+
+	@Id
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ADDRESS_ID")
 	private Integer addressId;
 	private String houseNo;
 	private String colony;
@@ -8,13 +23,17 @@ public class Address {
 	private String state;
 	private int pincode;
 
+	@ManyToOne
+	@JoinColumn(name = "CUSTOMER_ID")
+	private Customer customer;
+
 	public Address() {
 		super();
 	}
 
-	public Address(Integer addressId, String houseNo, String colony, String city, String state, int pincode) {
+	public Address(Integer addressId ,String houseNo, String colony, String city, String state, int pincode) {
 		super();
-		this.addressId = addressId;
+      this.addressId=addressId;
 		this.houseNo = houseNo;
 		this.colony = colony;
 		this.city = city;
@@ -68,6 +87,14 @@ public class Address {
 
 	public void setPincode(int pincode) {
 		this.pincode = pincode;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	@Override
