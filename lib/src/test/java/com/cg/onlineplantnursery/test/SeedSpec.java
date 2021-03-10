@@ -100,7 +100,7 @@ class SeedSpec {
 	@Test
 	void testViewAllPlants2() {
 		ISeedRepositoryImpl obj = new ISeedRepositoryImpl();
-		obj.viewAllSeeds("shrub");
+		obj.viewAllSeeds("Vegetable");
 	}
 }
 
