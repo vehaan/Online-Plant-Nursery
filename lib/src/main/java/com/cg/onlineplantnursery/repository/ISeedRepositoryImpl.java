@@ -43,6 +43,7 @@ public class ISeedRepositoryImpl implements ISeedRepository {
 			tempSeed.setSeedsStock(seed.getSeedsStock());
 			tempSeed.setSeedsCost(seed.getSeedsCost());
 			tempSeed.setSeedsPerPacket(seed.getSeedsPerPacket());
+			em.getTransaction().commit();
 		}
 		return tempSeed;
 	}
@@ -65,12 +66,12 @@ public class ISeedRepositoryImpl implements ISeedRepository {
 	public Seed viewSeed(int seedId) {	
 		em.getTransaction().begin();
 		Seed seed = em.find(Seed.class, seedId);
-		if(seed !=null) {
-			System.out.println(seed);
-			System.out.println("Checking by ID");
-		}
-		System.out.println(seed);
-		return null;
+//		if(seed !=null) {
+//			System.out.println(seed);
+//			System.out.println("Checking by ID");
+//		}
+		//System.out.println(seed);
+		return seed;
 	}
 
 	@Override
@@ -79,8 +80,8 @@ public class ISeedRepositoryImpl implements ISeedRepository {
 		TypedQuery<Seed> query = em.createQuery(str,Seed.class);
 		query.setParameter("ptitle", commonName);
 		Seed seed = query.getSingleResult();
-		System.out.println(seed);
-		return null;
+		//System.out.println(seed);
+		return seed;
 	}
 
 	@Override
@@ -88,23 +89,22 @@ public class ISeedRepositoryImpl implements ISeedRepository {
 		String str = "select seed from Seed seed";
 		TypedQuery<Seed> query = em.createQuery(str,Seed.class);
 		List<Seed> seeds = query.getResultList();
-		for(Seed s:seeds) {
-			System.out.println(s);
-		}
-		return null;
+//		for(Seed s:seeds) {
+//			System.out.println(s);
+//		}
+		return seeds;
 	}
 
 	@Override
 	public List<Seed> viewAllSeeds(String typeOfSeed) {
-		String str = "select seed from Seed seed where seed.typeOfSeed =:type";
+		String str = "select seed from Seed seed where seed.typeOfSeeds =:type";
 		TypedQuery<Seed> query = em.createQuery(str,Seed.class);
-		query.setParameter("type", typeOfSeed);
-		
+		query.setParameter("type", typeOfSeed);		
 		List<Seed> seeds = query.getResultList();
-		for(Seed s:seeds) {
-			System.out.println(s);
-		}
-		return null;
+//		for(Seed s:seeds) {
+//			System.out.println(s);
+//		}
+		return seeds;
 	}
 
 }

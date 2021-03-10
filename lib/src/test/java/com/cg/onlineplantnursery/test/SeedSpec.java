@@ -2,6 +2,9 @@ package com.cg.onlineplantnursery.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -36,7 +39,8 @@ class SeedSpec {
 	@Order(1)
 	void testAddSeed() {
 		//Seed seedTemp = new Seed(12,"Lemon","2 days","normal","Easy","25 degree celcius","Vegetable","For Lemon",20,2,10);
-		Seed seedTemp = new Seed(13,"Soya","2 days","normal","Medium","25 degree celcius","Vegetable","For Lemon",10,2,10);
+		//Seed seedTemp = new Seed(13,"Soya","2 days","normal","Medium","25 degree celcius","Vegetable","For Lemon",10,2,10);
+		Seed seedTemp = new Seed(14,"Rose","5 days","Easy","Medium","20 degree celcius","Flower","For Rose",5,2,4);
 		ISeedRepositoryImpl obj = new ISeedRepositoryImpl();
 		Seed seed1 = obj.addSeed(seedTemp);
 		assertNotNull(seed1.getCommonName());
@@ -62,13 +66,12 @@ class SeedSpec {
 	EntityManagerFactory factory =  Persistence.createEntityManagerFactory("test1");
 	EntityManager em  =  factory.createEntityManager();
 	em.getTransaction().begin();
-
-	Seed seedToBeDeleted = em.find(Seed.class,1);
+	Seed seedTemp = new Seed(13,"Soya","2 days","normal","Medium","25 degree celcius","Vegetable","For Lemon",10,2,10);
+	Seed seedToBeDeleted = em.find(Seed.class,seedTemp.getSeedId());
 	
-
 	Seed deletedSeed = obj.deleteSeed(seedToBeDeleted);
 	System.out.println(deletedSeed);
-	assertNull(deletedSeed);
+	assertNotNull(deletedSeed);
 	em.close();
 	factory.close();
 	}
@@ -78,7 +81,9 @@ class SeedSpec {
 	@Test
 	void testViewSeed() {
 		ISeedRepositoryImpl obj = new ISeedRepositoryImpl();
-		obj.viewSeed(12);
+		Seed seedActual = new Seed(12,"Apple","2 days","normal","Easy","25 degree celcius","Vegetable","For Lemon",20,2,10);
+		Seed seedExp = obj.viewSeed(12);
+		assertEquals(seedActual.getCommonName(),seedExp.getCommonName());
 	}
 	
 	@Disabled
@@ -86,21 +91,38 @@ class SeedSpec {
 	@Test
 	void testViewSeed2() {
 		ISeedRepositoryImpl obj = new ISeedRepositoryImpl();
-		obj.viewSeed("Apple");
+		Seed seedActual = new Seed(12,"Apple","2 days","normal","Easy","25 degree celcius","Vegetable","For Lemon",20,2,10);
+		Seed seedExp = obj.viewSeed("Apple");
+		assertEquals(seedActual.getCommonName(),seedExp.getCommonName());
+
 	}
 	
+	@Disabled
 	@Order(2)
 	@Test
 	void testViewAllSeeds() {
+		
 		ISeedRepositoryImpl obj = new ISeedRepositoryImpl();
-		obj.viewAllSeeds();
+		//ArrayList<Seed> seedListActual = new ArrayList<Seed>();
+		ArrayList<Seed> seedListExp = new ArrayList<Seed>();
+		
+		//seedListActual = (ArrayList<Seed>) obj.viewAllSeeds();
+		//seedListActual.add(new Seed(12,"Apple","2 days","normal","Easy","25 degree celcius","Vegetable","For Lemon",20,2,10));
+		//seedListActual.add(new Seed(13,"Soya","2 days","normal","Medium","25 degree celcius","Vegetable","For Lemon",10,2,10));
+		
+		seedListExp = (ArrayList<Seed>) obj.viewAllSeeds();
+		assertEquals(2,seedListExp.size());
+		
 	}
 	
+	@Disabled
 	@Order(3)
 	@Test
 	void testViewAllPlants2() {
 		ISeedRepositoryImpl obj = new ISeedRepositoryImpl();
-		obj.viewAllSeeds("Vegetable");
+		ArrayList<Seed> seedListExp = new ArrayList<Seed>();
+		seedListExp = (ArrayList<Seed>) obj.viewAllSeeds("Vegetable");
+		assertEquals(2,seedListExp.size());
 	}
 }
 
