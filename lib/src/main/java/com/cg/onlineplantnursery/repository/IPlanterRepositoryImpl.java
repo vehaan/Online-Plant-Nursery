@@ -14,7 +14,12 @@ public class IPlanterRepositoryImpl implements IPlanterRepository{
 
 	@Override
 	public Planter addPlanter(Planter planter) {
-		em.persist(planter);
+		if (em.find(Planter.class, planter.getPlanterId()) == null) {
+			em.getTransaction().begin();
+			em.persist(planter);
+			em.getTransaction().commit();
+		}
+		
 		return planter;
 	}
 
@@ -22,9 +27,9 @@ public class IPlanterRepositoryImpl implements IPlanterRepository{
 	public Planter updatePlanter(Planter planter) {
 		Planter p = em.find(Planter.class, planter.getPlanterId());
 		em.getTransaction().begin();
-		p.setPlanterShape("Ractangle"); //Hard coded for now
+		p.setPlanterShape("Rectangle"); //Hard coded for now
 		em.getTransaction().commit();
-		return planter;
+		return em.find(Planter.class, planter.getPlanterId());
 	}
 
 	@Override
@@ -61,9 +66,9 @@ public class IPlanterRepositoryImpl implements IPlanterRepository{
 
 	@Override
 	public List<Planter> viewAllPlanters(double minCost, double maxCost) {
-		Query query = em.createQuery("select p from Planter p where p.planterCost between minCost and maxCost");
+		TypedQuery<Planter> query = (TypedQuery<Planter>) em.createQuery("select p from Planter p where p.planterCost between :minCost and :maxCost");
 		List<Planter> selectedPlanters;
-		selectedPlanters = query.getResultList();
+		selectedPlanters = query.setParameter("minCost",(int)minCost).setParameter("maxCost", (int)maxCost).getResultList();
 		return selectedPlanters;
 	}
 

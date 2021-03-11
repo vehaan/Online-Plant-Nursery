@@ -9,86 +9,89 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import com.cg.onlineplantnursery.entity.Planter;
 import com.cg.onlineplantnursery.repository.IPlanterRepositoryImpl;
 
+@TestMethodOrder(OrderAnnotation.class)
 class PlanterSpec {
 	
 	
 	IPlanterRepositoryImpl planterrep;
 	
-	private Planter planter;
-	private Planter planter1;
+	private Planter planter; 
 	private List<Planter> allPlanters;
 	
 	
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		System.out.println("Testing started...");
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
+		System.out.println("Testing completed!");
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
+		planter = new Planter(1,34.50f,500,2,"Red","Circle",300,2000);
 		allPlanters = new ArrayList<>();
 		allPlanters.add(planter);
-		allPlanters.add(planter1);
-		planter = new Planter(new Integer(1),34.50f,500,2,"Red","Circle",300,2000);
 		planterrep = new IPlanterRepositoryImpl();
+		System.out.println("Testing next...");
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-	}
-
-	@Test
-	void test() {
-		fail("Not yet implemented");
+		System.out.println("Completed this test!");
 	}
 	
+	@Order(1)
 	@Test
 	void addPlanterTest() {
 		assertEquals(planter, planterrep.addPlanter(planter));
 	}
 	
+	@Order(6)
 	@Test
 	void updatePlanterTest() {
-		assertEquals(planter, planterrep.updatePlanter(planter));
+		assertEquals("Rectangle", (planterrep.updatePlanter(planter)).getPlanterShape()); //Hard coded for now
 	}
 	
+	@Order(7)
 	@Test
 	void deletePlanterTest() {
 		assertEquals(planter, planterrep.deletePlanter(planter));
 	}
 	
+	@Order(2)
 	@Test
 	void viewPlanterTest1() {
-		assertEquals(planter.getPlanterId(), planterrep.viewPlanter(planter.getPlanterId()));
+		assertEquals(planter.getPlanterId(), (planterrep.viewPlanter(planter.getPlanterId())).getPlanterId());
 	}
 	
+	@Order(3)
 	@Test
 	void viewPlanterTest2() {
-		assertEquals(planter.getPlanterShape(), planterrep.viewPlanter(planter.getPlanterShape()));
+		assertEquals(planter.getPlanterId(), planterrep.viewPlanter(planter.getPlanterShape()).getPlanterId());
 	}
 	
+	@Order(4)
 	@Test
 	void viewAllPlantersTest1() {
-	assertEquals(allPlanters.size(), planterrep.viewAllPlanters().size());
+	assertEquals(1, planterrep.viewAllPlanters().size());
 	}
 	
+	@Order(5)
 	@Test
 	void viewAllPlantersTest2() {
 		double min = 1000, max = 2500;
-		List<Planter> selectedPlanters = new ArrayList<>();
-		for (int i=0;i<allPlanters.size();i++) {
-			if (allPlanters.get(i).getPlanterCost() > min && allPlanters.get(i).getPlanterCost()<2500)
-				selectedPlanters.add(allPlanters.get(i));
-		}
-		assertEquals(selectedPlanters,planterrep.viewAllPlanters(min, max));
+		assertEquals(1,planterrep.viewAllPlanters(min, max).size());
 	}
 }
