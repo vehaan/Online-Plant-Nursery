@@ -24,13 +24,13 @@ public class Order {
 	private int quantity; //total quantity, i.e., planter+plant+seed
 	private double totalCost; 
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany//(cascade = CascadeType.ALL)
 	private Map<Plant, Integer> plants;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany//(cascade = CascadeType.ALL)
 	private Map<Seed, Integer> seeds;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany//(cascade = CascadeType.ALL)
 	private Map<Planter, Integer> planters;
 	
 	public Order() {

@@ -26,7 +26,7 @@ import com.cg.onlineplantnursery.entity.Seed;
 import com.cg.onlineplantnursery.repository.OrderRepositoryImpl;
 
 @TestMethodOrder(OrderAnnotation.class)
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OrderSpec {
 	
 	OrderRepositoryImpl ordrepimp;
@@ -71,10 +71,10 @@ public class OrderSpec {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
-
+	
 	@Test
 	//@Order(1)
-	void addOrderTest() {
+	void a_addOrderTest() {
 		assertEquals(order, ordrepimp.addOrder(order));
 	}
 	
