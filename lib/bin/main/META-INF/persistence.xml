@@ -10,7 +10,7 @@
             <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver" />
             <property name="hibernate.hbm2ddl.auto" value="update"/>    <!-- for auto create/update tables -->
         <property name="hibernate.show_sql" value="true"/>
-        <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect"/>
+        <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle8iDialect"/>
         </properties>
     </persistence-unit>
 </persistence>

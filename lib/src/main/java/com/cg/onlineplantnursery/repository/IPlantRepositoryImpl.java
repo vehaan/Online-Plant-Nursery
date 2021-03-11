@@ -14,19 +14,13 @@ public class IPlantRepositoryImpl implements IPlantRepository {
 	
 	@Override
 	public Plant addPlant(Plant plant) {
-
-		em.getTransaction().begin();
-		//Plant plant1 = new Plant();
-		//plant1.setPlantId(1);
-		//plant1.setCommonName("Lotus");
-		
-		em.persist(plant);
-		em.getTransaction().commit();
-		
-		System.out.println("Added one plant to database.");
-		em.close();
-		factory.close();
-		return plant;
+		if(em.find(Plant.class, plant.getPlantId())==null) {
+			em.getTransaction().begin();		
+			em.persist(plant);
+			em.getTransaction().commit();
+			return plant;
+		}		
+		return null;
 		
 	}
 
@@ -60,33 +54,23 @@ public class IPlantRepositoryImpl implements IPlantRepository {
 		em.remove(plantToBeDeleted);
 		em.getTransaction().commit();
 		return plantToBeDeleted;
-		//em.close();
-		//factory.close();
-		
 	}
 
 	@Override
 	public Plant viewPlant(int plantId) {
 		em.getTransaction().begin();
 		Plant tempPlant = em.find(Plant.class, plantId);
-		if(tempPlant != null) {
-			System.out.println(tempPlant);
-			System.out.println("just to check");
-		}
-		System.out.println(tempPlant);
-		System.out.println("just to check");
-		return null;
+		return tempPlant;
 	}
 
 	@Override
 	public Plant viewPlant(String commonName) {
-		String qStr = "SELECT plant FROM Plant plant WHERE plant.commonName =:ptitle";
+		String qStr = "SELECT plant FROM Plant plant WHERE plant.commonName = :commonName";
 		TypedQuery<Plant> query =em.createQuery(qStr,Plant.class);
-		query.setParameter("ptitle", commonName);
+		query.setParameter("commonName", commonName);
 		Plant plant = query.getSingleResult();
-		System.out.println(plant);
-		
-		return null;
+		//System.out.println(plant);		
+		return plant;
 	}
 
 	@Override
@@ -94,22 +78,18 @@ public class IPlantRepositoryImpl implements IPlantRepository {
 		String qStr = "select plant from Plant plant";
 		TypedQuery<Plant> query = em.createQuery(qStr, Plant.class);
 		List<Plant> plants = query.getResultList();
-		for(Plant x: plants) {
-			System.out.println(x);
-		}
-		return null;
+//		for(Plant x: plants) {
+//			System.out.println(x);
+//		}
+		return plants;
 	}
 
 	@Override
 	public List<Plant> viewAllPlants(String typeOfPlant) {
 		String qStr = "select plant from Plant plant where plant.typeOfPlant = :type";
-		TypedQuery<Plant> query = em.createQuery(qStr, Plant.class);
-		query.setParameter("type", typeOfPlant);
-		
+		TypedQuery<Plant> query = em.createQuery(qStr,Plant.class);
+		query.setParameter("type", typeOfPlant);		
 		List<Plant> plants = query.getResultList();
-		for(Plant x: plants) {
-			System.out.println(x);
-		}
-		return null;
+		return plants;
 	}
 }
