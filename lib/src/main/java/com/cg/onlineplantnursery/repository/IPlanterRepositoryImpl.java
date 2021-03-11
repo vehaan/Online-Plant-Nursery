@@ -3,7 +3,6 @@ package com.cg.onlineplantnursery.repository;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.swing.plaf.metal.MetalBorders.PaletteBorder;
 
 import com.cg.onlineplantnursery.entity.Planter;
 

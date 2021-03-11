@@ -19,29 +19,24 @@ public class Planter {
 	private int planterStock;
 	private int planterCost;
 	
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Plant> plants;
-	
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Seed> seeds;
+//	
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private List<Plant> plants;
+//	
+//	
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private List<Seed> seeds;
 
-	public Planter(Integer planterId, float planterheight, int planterCapacity, int drinageHoles, String planterColor,
-			String planterShape, int planterStock, int planterCost, List<Plant> plants, List<Seed> seeds) {
-		super();
-		this.planterId = planterId;
-		this.planterheight = planterheight;
-		this.planterCapacity = planterCapacity;
-		this.drinageHoles = drinageHoles;
-		this.planterColor = planterColor;
-		this.planterShape = planterShape;
-		this.planterStock = planterStock;
-		this.planterCost = planterCost;
-		this.plants = plants;
-		this.seeds = seeds;
-	}
-	
+	/*
+	 * public Planter(Integer planterId, float planterheight, int planterCapacity,
+	 * int drinageHoles, String planterColor, String planterShape, int planterStock,
+	 * int planterCost, List<Plant> plants, List<Seed> seeds) { super();
+	 * this.planterId = planterId; this.planterheight = planterheight;
+	 * this.planterCapacity = planterCapacity; this.drinageHoles = drinageHoles;
+	 * this.planterColor = planterColor; this.planterShape = planterShape;
+	 * this.planterStock = planterStock; this.planterCost = planterCost; this.plants
+	 * = plants; this.seeds = seeds; }
+	 */
 	
 
 	public Planter(Integer planterId, float planterheight, int planterCapacity, int drinageHoles, String planterColor,
@@ -59,21 +54,15 @@ public class Planter {
 
 
 
-	public List<Plant> getPlants() {
-		return plants;
-	}
-
-	public List<Seed> getSeeds() {
-		return seeds;
-	}
-
-	public void setPlants(List<Plant> plants) {
-		this.plants = plants;
-	}
-
-	public void setSeeds(List<Seed> seeds) {
-		this.seeds = seeds;
-	}
+	/*
+	 * public List<Plant> getPlants() { return plants; }
+	 * 
+	 * public List<Seed> getSeeds() { return seeds; }
+	 * 
+	 * public void setPlants(List<Plant> plants) { this.plants = plants; }
+	 * 
+	 * public void setSeeds(List<Seed> seeds) { this.seeds = seeds; }
+	 */
 
 	public Planter() {
 		super();
@@ -143,19 +132,22 @@ public class Planter {
 		this.planterCost = planterCost;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Planter [planterId=" + planterId + ", planterheight=" + planterheight + ", planterCapacity="
 				+ planterCapacity + ", drinageHoles=" + drinageHoles + ", planterColor=" + planterColor
 				+ ", planterShape=" + planterShape + ", planterStock=" + planterStock + ", planterCost=" + planterCost
-				+ ", plants=" + plants + ", seeds=" + seeds + "]";
+				+ "]";
 	}
 
-
-
-	
-	
-	
-	
-	
+	/*
+	 * @Override public String toString() { return "Planter [planterId=" + planterId
+	 * + ", planterheight=" + planterheight + ", planterCapacity=" + planterCapacity
+	 * + ", drinageHoles=" + drinageHoles + ", planterColor=" + planterColor +
+	 * ", planterShape=" + planterShape + ", planterStock=" + planterStock +
+	 * ", planterCost=" + planterCost + ", plants=" + plants + ", seeds=" + seeds +
+	 * "]"; }
+	 */
 }
