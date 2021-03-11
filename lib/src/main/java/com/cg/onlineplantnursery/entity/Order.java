@@ -1,7 +1,7 @@
 package com.cg.onlineplantnursery.entity;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,44 +10,44 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.cg.onlineplantnursery.entity.Planter;
+import com.cg.onlineplantnursery.entity.Plant;
+import com.cg.onlineplantnursery.entity.Seed;
 
 @Entity
-@Table(name = "Orders")
+@Table(name = "TestingTableForOrders")
 public class Order {
 	
 	@Id
 	private Integer bookingOrderId;
 	private LocalDate orderDate;
 	private String transactionMode;
-	private int quantity;
-	private double totalCost;
+	private int quantity; //total quantity, i.e., planter+plant+seed
+	private double totalCost; 
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Planter> planters;
+	private Map<Plant, Integer> plants;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private Map<Seed, Integer> seeds;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private Map<Planter, Integer> planters;
 	
 	public Order() {
 		super();
 	}
 
 	public Order(Integer bookingOrderId, LocalDate orderDate, String transactionMode, int quantity, double totalCost,
-			List<Planter> planters) {
+			Map<Plant, Integer> plants, Map<Seed, Integer> seeds, Map<Planter, Integer> planters) {
 		super();
 		this.bookingOrderId = bookingOrderId;
 		this.orderDate = orderDate;
 		this.transactionMode = transactionMode;
 		this.quantity = quantity;
 		this.totalCost = totalCost;
+		this.plants = plants;
+		this.seeds = seeds;
 		this.planters = planters;
-	}
-	
-	//Extra constructor just for testing purpose....After merging remove this
-	public Order(Integer bookingOrderId, LocalDate orderDate, String transactionMode, int quantity, double totalCost) {
-		super();
-		this.bookingOrderId = bookingOrderId;
-		this.orderDate = orderDate;
-		this.transactionMode = transactionMode;
-		this.quantity = quantity;
-		this.totalCost = totalCost;
 	}
 
 	public Integer getBookingOrderId() {
@@ -90,73 +90,35 @@ public class Order {
 		this.totalCost = totalCost;
 	}
 
-	public List<Planter> getPlanters() {
+	public Map<Plant, Integer> getPlants() {
+		return plants;
+	}
+
+	public void setPlants(Map<Plant, Integer> plants) {
+		this.plants = plants;
+	}
+
+	public Map<Seed, Integer> getSeeds() {
+		return seeds;
+	}
+
+	public void setSeeds(Map<Seed, Integer> seeds) {
+		this.seeds = seeds;
+	}
+
+	public Map<Planter, Integer> getPlanters() {
 		return planters;
 	}
 
-	public void setPlanters(List<Planter> planters) {
+	public void setPlanters(Map<Planter, Integer> planters) {
 		this.planters = planters;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((bookingOrderId == null) ? 0 : bookingOrderId.hashCode());
-		result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
-		result = prime * result + ((planters == null) ? 0 : planters.hashCode());
-		result = prime * result + quantity;
-		long temp;
-		temp = Double.doubleToLongBits(totalCost);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((transactionMode == null) ? 0 : transactionMode.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Order other = (Order) obj;
-		if (bookingOrderId == null) {
-			if (other.bookingOrderId != null)
-				return false;
-		} else if (!bookingOrderId.equals(other.bookingOrderId))
-			return false;
-		if (orderDate == null) {
-			if (other.orderDate != null)
-				return false;
-		} else if (!orderDate.equals(other.orderDate))
-			return false;
-		if (planters == null) {
-			if (other.planters != null)
-				return false;
-		} else if (!planters.equals(other.planters))
-			return false;
-		if (quantity != other.quantity)
-			return false;
-		if (Double.doubleToLongBits(totalCost) != Double.doubleToLongBits(other.totalCost))
-			return false;
-		if (transactionMode == null) {
-			if (other.transactionMode != null)
-				return false;
-		} else if (!transactionMode.equals(other.transactionMode))
-			return false;
-		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Order [bookingOrderId=" + bookingOrderId + ", orderDate=" + orderDate + ", transactionMode="
-				+ transactionMode + ", quantity=" + quantity + ", totalCost=" + totalCost + ", planters=" + planters
-				+ "]";
+				+ transactionMode + ", quantity=" + quantity + ", totalCost=" + totalCost + ", plants=" + plants
+				+ ", seeds=" + seeds + ", planters=" + planters + "]";
 	}
-
-	
-	
 	
 }
