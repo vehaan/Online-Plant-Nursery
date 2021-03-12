@@ -27,13 +27,17 @@ public class Address {
 	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
 
+	
+	
+	
+
 	public Address() {
 		super();
 	}
 
-	public Address(Integer addressId ,String houseNo, String colony, String city, String state, int pincode) {
+	public Address(Integer addressId, String houseNo, String colony, String city, String state, int pincode) {
 		super();
-      this.addressId=addressId;
+		this.addressId = addressId;
 		this.houseNo = houseNo;
 		this.colony = colony;
 		this.city = city;

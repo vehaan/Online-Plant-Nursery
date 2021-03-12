@@ -18,43 +18,41 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 
-  @Table(name = "CUSTOMERS",uniqueConstraints = {
-  
-  @UniqueConstraint(columnNames = "CUSTOMER_ID"),
-  
-  @UniqueConstraint(columnNames = "USERNAME") })
- 
+@Table(name = "CUSTOMERS", uniqueConstraints = {
 
+		@UniqueConstraint(columnNames = "CUSTOMER_ID"),
+
+		@UniqueConstraint(columnNames = "USERNAME") })
 
 public class Customer {
 
 	@Id
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CUSTOMER_ID",unique = true , nullable = false)
+	@Column(name = "CUSTOMER_ID", unique = true, nullable = false)
 	private Integer customerId;
 
-	@Column(name = "CUSTOMER_NAME",nullable = false)
+	@Column(name = "CUSTOMER_NAME", nullable = false)
 	private String customerName;
 
-	@Column(name = "CUSTOMER_EMAIL",unique = true)
+	@Column(name = "CUSTOMER_EMAIL", unique = true)
 	private String customerEmail;
-    
-	@Column(name = "USERNAME",unique = true,nullable = false)
+
+	@Column(name = "USERNAME", unique = true, nullable = false)
 	private String username; // unique
-	
+
 	@Column(name = "PASSWORD")
 	private String password;
 
-	@OneToMany(mappedBy = "customer",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Address> address = new ArrayList<>();
 
 	public Customer() {
 		super();
 	}
 
-	public Customer(Integer customerId ,String customerName, String customerEmail, String username, String password) {
+	public Customer(Integer customerId, String customerName, String customerEmail, String username, String password) {
 		super();
-         this.customerId=customerId;
+		this.customerId = customerId;
 		this.customerName = customerName;
 		this.customerEmail = customerEmail;
 		this.username = username;

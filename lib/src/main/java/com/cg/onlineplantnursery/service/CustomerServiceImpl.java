@@ -8,36 +8,36 @@ import com.cg.onlineplantnursery.repository.ICustomerRepository;
 
 public class CustomerServiceImpl implements ICustomerService {
 
-	ICustomerRepository cr = new CustomerRepositoryImpl();
+	//ICustomerRepository cr = new CustomerRepositoryImpl();
 
 	@Override
 	public Customer addCustomer(Customer customer) {
-		return cr.addCustomer(customer);
+		return null;
 	}
 
 	@Override
 	public Customer updateCustomer(Customer tenant) {
-		return cr.updateCustomer(tenant);
+		return null;
 	}
 
 	@Override
 	public Customer deleteCustomer(Customer tenant) {
-		return cr.deleteCustomer(tenant);
+		return null;
 	}
 
 	@Override
 	public Customer viewCustomer(int customerId) {
-		return cr.viewCustomer(customerId);
+		return null;
 	}
 
 	@Override
 	public List<Customer> viewAllCustomers() {
-		return cr.viewAllCustomers();
+		return null;
 	}
 
 	@Override
 	public boolean validateCustomer(String userName, String password) {
-		return cr.validateCustomer(userName, password);
+		return false;
 	}
 
 }
